@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Shows from "../Shared/Shows";
+import axios from "axios";
 
 const couraselImgs = [
   "https://assets-in.bmscdn.com/promotions/cms/creatives/1692875161616_rakhshbandhadesktop.jpg",
@@ -8,35 +9,18 @@ const couraselImgs = [
   "https://assets-in.bmscdn.com/promotions/cms/creatives/1692954046674_lolladesktop.jpg",
   "https://assets-in.bmscdn.com/promotions/cms/creatives/1690965948939_virdasreviseddesktop.jpg",
 ];
-const MoviesList = [
-  {
-    _id: "5ab12666f36d2879268f2902",
-    name: "Death Wish",
-    language: "ENGLISH",
-    type: "Action Crime Thriller",
-    rate: 3.2,
-    imageUrl: "https://image.ibb.co/gC9PfH/dw.jpg",
-  },
-  {
-    _id: "5ab12612f36d2879268f284a",
-    name: "Black Panther",
-    language: "ENGLISH",
-    rate: 4.5,
-    type: "Action Adventure Fantasy",
-    imageUrl: "https://image.ibb.co/f0hhZc/bp.jpg",
-  },
-  {
-    _id: "5ab12678f36d2879268f291d",
-    name: "Coco",
-    language: "ENGLISH",
-    type: "Adventure Animation Family",
-    rate: 5,
-    imageUrl: "https://image.ibb.co/dQwWSx/coco.jpg",
-  },
-];
 
 function Header() {
   const [imgcount, setImgCount] = useState(0);
+  const [moviesList, setMoviesList] = useState(null);
+
+  useEffect(() => {
+    axios.get("http://3.17.216.66:4000/latest").then((response) => {
+      setMoviesList(response.data);
+      console.log(response.data);
+    });
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (imgcount === couraselImgs.length - 1) {
@@ -50,6 +34,7 @@ function Header() {
     return () => clearInterval(interval);
   }, [imgcount]);
 
+  if (!moviesList) return null;
   return (
     <div>
       <div className="slide">
@@ -89,7 +74,7 @@ function Header() {
           <a href="">See All</a>
         </div>
 
-        <Shows MoviesList={MoviesList}></Shows>
+        <Shows MoviesList={moviesList}></Shows>
       </div>
     </div>
   );
