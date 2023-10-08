@@ -6,6 +6,9 @@ import LatestMovies from "./Pages/LatestMovies";
 import UpcomingMovies from "./Pages/UpcomingMovies";
 import NearbyEvents from "./Pages/NearbyEvents";
 import MovieDetails from "./Components/Shared/MovieDetails/MovieDetails";
+import { baseUrl } from "./utils/apiLinks";
+import TicketBooking from "./Pages/TicketBooking/TicketBooking";
+import FinalBooking from "./Pages/FinalBooking";
 
 function App() {
   return (
@@ -27,7 +30,25 @@ function App() {
         ></Route>
         <Route
           path="/latestMovies/:userId"
-          element={<MovieDetails></MovieDetails>}
+          element={<MovieDetails apiLink={`${baseUrl}latest`}></MovieDetails>}
+        ></Route>
+        <Route
+          path="/upcomingMovies/:userId"
+          element={
+            <MovieDetails apiLink={`${baseUrl}upcomingMovies`}></MovieDetails>
+          }
+        ></Route>
+        <Route
+          path="/nearbyEvents/:userId"
+          element={<MovieDetails apiLink={`${baseUrl}events`}></MovieDetails>}
+        ></Route>
+        <Route
+          path="/ticketBooking"
+          element={<TicketBooking></TicketBooking>}
+        ></Route>
+        <Route
+          path="/finalBooking"
+          element={<FinalBooking></FinalBooking>}
         ></Route>
         ;
       </Routes>

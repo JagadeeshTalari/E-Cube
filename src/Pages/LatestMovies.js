@@ -41,6 +41,7 @@ function LatestMovies() {
   if (!moviesList) return null;
   return (
     <div>
+      <h1>Latest Movies</h1>
       <Shows MoviesList={moviesList}></Shows>
     </div>
   );

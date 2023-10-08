@@ -14,6 +14,11 @@ function UpcomingMovies() {
 
   if (!moviesList) return null;
 
-  return <Shows MoviesList={moviesList}></Shows>;
+  return (
+    <>
+      <h1>Upcoming Movies</h1>
+      <Shows MoviesList={moviesList}></Shows>
+    </>
+  );
 }
 export default UpcomingMovies;
